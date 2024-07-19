@@ -57,6 +57,17 @@ nma_eap_fill_connection (NMAEap *method,
 }
 
 void
+nma_eap_focus_secrets_default (NMAEap *method)
+{
+	g_return_if_fail (method != NULL);
+
+	g_print("nma_eap_focus_secrets_default(): method %p\n", method->focus_secrets_default);
+
+	if (method->focus_secrets_default)
+		method->focus_secrets_default (method);
+}
+
+void
 nma_eap_update_secrets (NMAEap *method, NMConnection *connection)
 {
 	g_return_if_fail (method != NULL);
@@ -103,6 +114,7 @@ nma_eap_init (gsize obj_size,
               NMAEapValidateFunc validate,
               NMAEapAddToSizeGroupFunc add_to_size_group,
               NMAEapFillConnectionFunc fill_connection,
+              NMAEapFocusSecretsDefaultFunc focus_secrets_default,
               NMAEapUpdateSecretsFunc update_secrets,
               NMAEapDestroyFunc destroy,
               const char *ui_resource,
@@ -125,6 +137,7 @@ nma_eap_init (gsize obj_size,
 	method->validate = validate;
 	method->add_to_size_group = add_to_size_group;
 	method->fill_connection = fill_connection;
+	method->focus_secrets_default = focus_secrets_default;
 	method->update_secrets = update_secrets;
 	method->default_field = default_field;
 	method->phase2 = phase2;

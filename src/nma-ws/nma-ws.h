@@ -42,6 +42,8 @@ NMA_AVAILABLE_IN_1_8_28
 void nma_ws_update_secrets (NMAWs *self,
                             NMConnection *connection);
 
+void nma_ws_focus_secrets_default (NMAWs *self);
+
 NMA_AVAILABLE_IN_1_8_28
 gboolean nma_ws_adhoc_compatible (NMAWs *self);
 
